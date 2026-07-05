@@ -44,15 +44,9 @@ Other esqLABS R packages were deliberately left out for now:
 - **Private** repositories will not build on a public universe.
 - Shiny-app packages and unfinished package skeletons are not distributed as library dependencies.
 
-## Enabling the universe (one-time, needs esqLABS org admin)
-
-1. Push this repository to `https://github.com/esqLABS/universe` (the repository must be named `universe`).
-2. Install the [R-universe GitHub App](https://github.com/apps/r-universe) on the `esqLABS` organization and grant it access to the `universe` repository.
-3. R-universe creates the build monorepo under `https://github.com/r-universe/esqlabs` and starts building. First builds usually finish within an hour; the dashboard appears at `https://esqlabs.r-universe.dev`.
-
 ## Maintaining the list
 
-- **Add a package**: append an object with its `package` name (the `Package:` field from the repository's `DESCRIPTION`) and its `url`. If the package does not cut GitHub releases, drop the `"branch"` field so R-universe builds its default branch instead of `*release`.
+- **Add a package**: append an object with its `package` name (the `Package:` field from the repository's `DESCRIPTION`) and its `url`. If the package does not cut GitHub releases, drop the `"branch"` field so R-universe builds its default branch instead of `*release`. **Also grant the R-universe GitHub App access to the new package's repository**: the app is installed on the `esqLABS` org with "only select repositories" scope, so each newly listed package repo must be added to its allow-list (Org settings -> GitHub Apps -> r-universe -> Configure). A public repo is read anyway, but adding it explicitly is the reliable path; a private repo will not build on a public universe.
 - **Remove a package**: delete its object.
 - **Change what is tracked**: edit or remove the `"branch"` field on that package's entry.
 
